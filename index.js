@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const argv = require("minimist")(process.argv.slice(2));
 const prompts = require("prompts");
-const { bold, dim, blue, yellow, green, red, gray } = require("kolorist");
+const { bold, dim, blue, yellow, green } = require("kolorist");
 const { version } = require("./package.json");
 
 const cwd = process.cwd();
