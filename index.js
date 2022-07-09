@@ -3,6 +3,7 @@ const path = require("path");
 const argv = require("minimist")(process.argv.slice(2));
 const prompts = require("prompts");
 const { bold, dim, blue, yellow, green } = require("kolorist");
+const { sync, commandSync } = require("execa");
 const { version } = require("./package.json");
 
 const cwd = process.cwd();
@@ -80,6 +81,48 @@ async function init() {
       path.join(templateDir, "licenses", license),
       path.join(root, "LICENSE")
     );
+
+    const npmPackages = fs
+      .readdirSync(path.join(`${process.env.APPDATA}`, "npm"))
+      .toString();
+
+    let pkgManagers = [{ title: "npm", value: "npm" }];
+
+    if (/pnpm/.test(npmPackages))
+      pkgManagers.push({ title: "pnpm", value: "pnpm" });
+    if (/yarn/.test(npmPackages))
+      pkgManagers.push({ title: "yarn", value: "yarn" });
+
+    prompts({
+      type: "select",
+      name: "pkgManager",
+      message: "Package manager:",
+      choices: pkgManagers,
+    })
+      .then((_) => _.pkgManager)
+      .then((_) => {
+        switch (_) {
+          // TODO: support Yarn (if Yarn's Classic Version supports `yarn dlx`, it will be easy to support it)
+          /*case "yarn":
+            sync("yarn", ["dlx","readme-md-generator"], {
+              stdio: "inherit",
+              cwd: root,
+            }).stdout.pipe(process.stdout);
+            break;*/
+          case "pnpm":
+            sync("pnpx", ["readme-md-generator"], {
+              stdio: "inherit",
+              cwd: root,
+            }).stdout.pipe(process.stdout);
+            break;
+          default:
+            sync("npx", ["readme-md-generator"], {
+              stdio: "inherit",
+              cwd: root,
+            }).stdout.pipe(process.stdout);
+        }
+      });
+
     console.log(green("Done."));
   }
 }
