@@ -53,28 +53,28 @@ async function init() {
       name: "license",
       message: "License: ",
       choices: [
-        /*bug*/ { title: "Apache License", value: "alv2" },
+        { title: "Apache License", value: "alv2" },
         { title: "GNU General Public License v3.0", value: "gplv3" },
-        /*bug*/ { title: "MIT License", value: "mit" },
+        { title: "MIT License", value: "mit" },
         { title: "BSD 2-Clause License", value: "bsdv2" },
-        /*bug*/ { title: "BSD 3-Clause License", value: "bsdv3" },
+        { title: "BSD 3-Clause License", value: "bsdv3" },
         { title: "Boost Software License", value: "bsl" },
-        /*bug*/ {
+        {
           title: "Creative Commons Zero v1.0 Universal",
           value: "cc01",
         },
         { title: "Eclipse Public License - v 2.0", value: "eplv2" },
-        /*bug*/ {
+        {
           title: "GNU Affero General Public License v3.0",
           value: "agplv3",
         },
         { title: "GNU General Public License v2.0", value: "gplv2" },
-        /*bug*/ {
+        {
           title: "GNU Lesser General Public License v2.1",
           value: "lgplv21",
         },
         { title: "Mozilla Public License 2.0", value: "mplv2" },
-        /*bug*/ { title: "The Unlicense", value: "tu" },
+        { title: "The Unlicense", value: "tu" },
       ],
     });
     fs.copyFileSync(
@@ -90,8 +90,8 @@ async function init() {
 
     if (/pnpm/.test(npmPackages))
       pkgManagers.push({ title: "pnpm", value: "pnpm" });
-    if (/yarn/.test(npmPackages))
-      pkgManagers.push({ title: "yarn", value: "yarn" });
+    /*if (/yarn/.test(npmPackages))
+      pkgManagers.push({ title: "yarn", value: "yarn" });*/
 
     prompts({
       type: "select",
