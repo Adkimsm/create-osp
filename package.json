@@ -1,0 +1,27 @@
+{
+  "name": "create-osp",
+  "version": "0.0.1",
+  "description": "Create Starter Template for Open Source Project",
+  "author": {
+    "email": "3020035335@qq.com",
+    "name": "Adkimsm",
+    "url": "https://github.com/Adkimsm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Adkimsm/create-osp.git"
+  },
+  "main": "index.js",
+  "bin": {
+    "create-osp": "index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "execa": "5",
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2"
+  }
+}
